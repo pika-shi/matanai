@@ -17,9 +17,9 @@ initlat, initlng = 0, 0
 
 if form.has_key('query'):
     url += '&keyword=' + form['query'].value
-elif form.has_key('lat') and form.has_key('lng'):
+if form.has_key('lat') and form.has_key('lng'):
     initlat, initlng = form['lat'].value, form['lng'].value
-    url += '&lat=' + initlat + '&lng=' + initlng
+    if not form.has_key('query'): url += '&lat=' + initlat + '&lng=' + initlng
 else:
     initlat, initlng = 35.02666, 135.781764
     url += '&lat=' + str(initlat) + '&lng=' + str(initlng)
@@ -29,8 +29,10 @@ if form.has_key('color'):
     displaycolor = form['color'].value
 
 shops = json.load(urllib2.urlopen(url))['results']['shop']
-if (initlat, initlng) == (0, 0):
+if (initlat, initlng) == (0, 0) and shops:
     initlat, initlng = shops[0]['lat'], shops[0]['lng']
+else:
+    initlat, initlng = 35.02666, 135.781764
 
 markers = ''
 for i, shop in enumerate(shops):
@@ -73,6 +75,7 @@ zoom: 17,
 minZoom: 16,
 maxZoom: 20,
 mapTypeId: google.maps.MapTypeId.ROADMAP,
+disableDefaultUI: true,
 center: initlatlng,
 streetViewControl: false
 }};
@@ -80,21 +83,21 @@ streetViewControl: false
 map = new google.maps.Map(document.getElementById("map"), options);
 
 var icon_blue = new google.maps.MarkerImage(
-'face_blue50.png',
+'img/face_blue50.png',
 new google.maps.Size(50, 50),
 new google.maps.Point(0,0),
 new google.maps.Point(25, 25)
 );
 
 var icon_yellow = new google.maps.MarkerImage(
-'face_yellow50.png',
+'img/face_yellow50.png',
 new google.maps.Size(50, 50),
 new google.maps.Point(0,0),
 new google.maps.Point(25, 25)
 );
 
 var icon_red = new google.maps.MarkerImage(
-'face_red50.png',
+'img/face_red50.png',
 new google.maps.Size(50, 50),
 new google.maps.Point(0,0),
 new google.maps.Point(25, 25)
