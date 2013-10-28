@@ -7,11 +7,11 @@
 
 body {
     font-family: 'Titillium Web', sans-serif;
+    top: 0px;
     font-size: 16px;
     line-height: 2;
     color:#666666;
     background: #2a2113;
-    /* background: #ffaa56; */
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%;
 }
@@ -51,12 +51,12 @@ p {
 }
 
 .top-container{
-    background-image:url(../img/website_back7.png);
+    background-image:url(../img/website_back.png);
     background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position:0px 0px;
+    background-size: 100% 100%;
     background-color:#ffd4aa;
-    background-position: center center;
+    background-position: 0px 0px;
+    background-size:cover;
     padding:10px;
     max-width:100%;
     z-index:2;
